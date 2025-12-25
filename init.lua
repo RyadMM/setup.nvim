@@ -159,7 +159,7 @@ vim.o.inccommand = 'split'
 vim.o.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
-vim.o.scrolloff = 10
+vim.o.scrolloff = 0
 
 -- if performing an operation that would fail due to unsaved changes in the buffer (like `:q`),
 -- instead raise a dialog asking if you wish to save the current file(s)
@@ -175,6 +175,27 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+
+-- Paste over visual selection without yanking replaced text
+vim.keymap.set('x', '<leader>p', '"_dP', { desc = '[P]aste without yanking' })
+
+-- Delete without yanking to register
+vim.keymap.set('n', '<leader>d', '"_d', { desc = '[D]elete without yanking' })
+vim.keymap.set('x', '<leader>d', '"_d', { desc = '[D]elete without yanking' })
+
+-- Y yanks to end of line (like D/C)
+vim.keymap.set('n', 'Y', 'vg$', { desc = '[Y]ank to end of line' })
+
+-- Search results stay centered
+vim.keymap.set('n', 'n', 'nzzzv', { desc = 'Next search result (centered)' })
+vim.keymap.set('n', 'N', 'Nzzzv', { desc = 'Prev search result (centered)' })
+
+-- Join lines without cursor jump
+vim.keymap.set('n', 'J', 'mzJ`z', { desc = '[J]oin lines (stay in place)' })
+
+-- Half-page jumps stay centered
+vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'Half page down (centered)' })
+vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = 'Half page up (centered)' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
